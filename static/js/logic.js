@@ -14,7 +14,9 @@ var myMap = L.map("map", {
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(myMap);
+
 var geoData = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+
 d3.json(geoData).then(function (response) {
   function circleColor(size) {
     //using a case statement set the color of the ciricle based on size.
@@ -26,8 +28,7 @@ d3.json(geoData).then(function (response) {
     else if (size >= 50 && size < 70) { return "#ffc40c"; } //light orange
     else if (size >= 70 && size < 90) { return "#ffa500"; } //orange
     else
-      return '#ff0000';
-
+      return '#ff0000'; //red
   }
   function fillColor(size) {
     //using a case statement set the color of the ciricle based on size.
@@ -41,7 +42,6 @@ d3.json(geoData).then(function (response) {
       return 1;
 
   }
-
   //fill the radius based on size 
   function radiusSize(y) {
     if (y == 0) { return 1; }
@@ -49,18 +49,22 @@ d3.json(geoData).then(function (response) {
   }
   //set the circles to a look and feel  
   function lookandfeel(x) {
-    console.log(x);
-    return {
+    return {      
       color: circleColor(x.geometry.coordinates[2]),
       fillOpacity: fillColor(x.geometry.coordinates[2]),
-      //     fillcolor: "white", //"white" build your case function 3rd coordinate
       radius: radiusSize(x.properties.mag)
     };
   }
-  L.geoJson(response, {
+//popups
+//copied from student activities week 15 activities 1 geoJson
+function onEachFeature(feature, layer) {
+  layer.bindPopup(`<h3>${feature.properties.place}</h3><hr><p>${new Date(feature.properties.time)}</p>`);
+}
+
+   L.geoJson(response, {
     pointToLayer: function (x, latlong) {
       return L.circleMarker(latlong);
-    }, style: lookandfeel
-
+    }, style: lookandfeel,
+    onEachFeature: onEachFeature
   }).addTo(myMap);
 });
