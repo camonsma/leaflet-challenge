@@ -68,3 +68,19 @@ function onEachFeature(feature, layer) {
     onEachFeature: onEachFeature
   }).addTo(myMap);
 });
+
+//borrowed from Stack overflow.
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+
+  var last = "<h3>1</h3> 30 to 50"+" <h4>1</h4> 50 to 70";
+  var final = "<h5>1</h5> 70 to 90"+" <h6>1</h6>90+";
+
+    var div = L.DomUtil.create('div', 'info legend');
+       div.innerHTML = 
+          "<h1>1</h1>-10 to 10"+"<h2>1</h2>10 to 30"+last+final;
+    return div;
+};
+
+legend.addTo(myMap);

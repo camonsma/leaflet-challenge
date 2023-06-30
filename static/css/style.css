@@ -8,3 +8,34 @@ body,
 html {
   height: 100%;
 }
+
+h1 {
+  color: green;
+  background-color: green ;
+  border: 1px solid black;
+}
+h2 {
+  color: greenyellow;
+  background-color: greenyellow ;
+  border: 1px solid black;
+}
+h3 {
+  color: rgba(255, 208, 0, 0.589);
+  background-color: rgba(255, 208, 0, 0.589) ;
+  border: 1px solid black;
+}
+h4 {
+  color: rgb(255, 136, 0);
+  background-color:   rgb(255, 136, 0);
+  border: 1px solid black;
+}
+h5 {
+  color: orange;
+  background-color: orange ;
+  border: 1px solid black;
+}
+h6 {
+  color: red;
+  background-color: red ;
+  border: 1px solid black;
+}
